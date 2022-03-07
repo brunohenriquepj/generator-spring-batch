@@ -1,0 +1,17 @@
+{
+  "name": "generator-spring-batch",
+  "version": "0.0.0",
+  "description": "Spring Batch Yeoman Generator",
+  "main": "index.js",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "files": [
+    "generators"
+  ],
+  "author": "Bruno Pereira",
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^5.6.1"
+  }
+}

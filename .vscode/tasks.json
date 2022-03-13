@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "link",
+			"problemMatcher": [],
+			"label": "npm: link",
+			"detail": "npm link",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

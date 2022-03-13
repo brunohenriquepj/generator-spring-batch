@@ -1,32 +1,38 @@
-var Generator = require('yeoman-generator');
+var Generator = require("yeoman-generator");
 
-class MyGenerator extends Generator {
-    helper() {
-        console.log('methods on the parent generator won\'t be called automatically');
-      }
-}
+module.exports = class extends Generator {
 
-module.exports = class extends MyGenerator {
-    exec() {
-        this.helper();
-    }
+  async prompting() {
+    this.answers = await this.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Your project name",
+        default: this.appname,
+      },
+      {
+        type: "confirm",
+        name: "cool",
+        message: "Would you like to enable the Cool feature?",
+      },
+      {
+        type: "input",
+        name: "username",
+        message: "What's your username",
+        store: true,
+      },
+    ]);
+  }
+
+  writing() {
+    this.log("app name", this.answers.name);
+    this.log("cool feature", this.answers.cool);
+    this.log("username", this.answers.username);
+
+    this.fs.copyTpl(this.templatePath("spring-batch"), this.destinationPath(), {name: this.answers.name});
+  }
+
+  install() {
+    this.spawnCommand("mvn", ["clean", "install", "package", "-U", "-DskipTests"]);
+  }
 };
-
-/*class extends MyGenerator {
-    constructor(args, opts) {
-        super(args, opts);
-
-        this.option('babel');
-        this.helperMethod = function () {
-            console.log('won\'t be called automatically');
-        };
-    }
-
-    method1() {
-        this.log('method 1 just ran');
-      }
-    
-    method2() {
-    this.log('method 2 just ran');
-    }
-};*/
